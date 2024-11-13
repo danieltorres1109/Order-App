@@ -6,17 +6,16 @@ import { User } from "@/types";
 import { IProduct } from "@/types/products";
 
 interface Props {
-    order: IOrder;
     users: User[];
     products: IProduct[];
 }
 
-export default function EditPage({ order, users, products }: Props) {
+export default function CreatePage({ users, products }: Props) {
     return (
-        <AuthenticatedLayout header="Editar Orden">
+        <AuthenticatedLayout header="Crear Orden">
             <OrderFormBase
-                mainTitle="Editar Orden"
-                model={order}
+                mainTitle="Crear Orden"
+                model={null}
                 users={users}
                 products={products}
                 isOpen={true}

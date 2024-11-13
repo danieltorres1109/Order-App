@@ -12,14 +12,14 @@ export type OrderStatus =
     | "failed";
 
 export interface IOrder {
-    id: number;
+    id?: number;
     user_id: number | null;
     status: OrderStatus;
     totalSell: number;
-    created_at: string;
-    updated_at: string;
+    created_at?: string;
+    updated_at?: string;
 
     /* Relations */
-    user: User;
+    user?: User;
     order_details: any[];
 }

@@ -9,6 +9,7 @@ import { IProduct } from "@/types/products";
 import DateTimeInput from "../Form/DateTimeInput";
 import { useOrderDetails } from "@/hooks/userOrderDetail";
 import { statusOption } from "@/Constants/constants";
+import { toast } from "react-toastify";
 
 interface Props {
     users: User[];
@@ -20,6 +21,13 @@ interface Props {
     toggleOpen: () => void;
 }
 
+const initialData: IOrder = {
+    user_id: null,
+    status: "pending",
+    order_details: [],
+    totalSell: 0,
+};
+
 export const OrderFormBase = ({
     model = null,
     users,
@@ -27,11 +35,7 @@ export const OrderFormBase = ({
     onlyView,
 }: Props) => {
     const { data, setData, post, processing, progress, errors, reset } =
-        useForm<IOrder>(model);
-
-    const submit: FormEventHandler = (e) => {
-        console.log("do s");
-    };
+        useForm<IOrder>(model ?? initialData);
 
     const { total, addProduct, removeProduct } = useOrderDetails({
         products,
@@ -39,9 +43,36 @@ export const OrderFormBase = ({
         setData,
     });
 
-    // Filtrar los productos que no han sido añadidos
+    const submit: FormEventHandler = (e) => {
+        e.preventDefault();
+
+        console.log(data);
+
+        const url = data.id ? `/edit-order/${data.id}` : "/orders";
+
+        post(url, {
+            preserveScroll: true,
+            forceFormData: true,
+            onSuccess: () => {
+                toast.success(
+                    data.id
+                        ? "Orden actualizada correctamente"
+                        : "Orden creada correctamente"
+                );
+            },
+            onError: () => {
+                toast.error(
+                    data.id
+                        ? "Error al actualizar la orden"
+                        : "Error al crear la orden"
+                );
+            },
+        });
+    };
+
     const availableProducts = products.filter(
-        (product) => !data.order_details.some((item) => item.id === product.id)
+        (product) =>
+            !data.order_details?.some((item) => item.product_id === product.id)
     );
 
     return (
@@ -63,7 +94,7 @@ export const OrderFormBase = ({
                     label="Comprador"
                     setData={setData}
                     readOnly={onlyView}
-                    error={errors.user}
+                    error={errors.user_id}
                     name="user"
                     value={data.user?.id}
                     options={users.map((user) => ({
@@ -88,7 +119,7 @@ export const OrderFormBase = ({
                 />
 
                 <DateTimeInput
-                    value={data.created_at}
+                    value={data.created_at ?? ""}
                     setData={setData}
                     errors={errors}
                 />
@@ -101,6 +132,8 @@ export const OrderFormBase = ({
                         className="input"
                         onChange={(e) => {
                             addProduct(e.target.value);
+                            console.log(e.target.value);
+
                             e.target.value = "";
                         }}
                         defaultValue=""
@@ -116,6 +149,12 @@ export const OrderFormBase = ({
                     </select>
                 </div>
 
+                {errors.order_details && (
+                    <div className="col-span-12 text-red-500">
+                        {errors.order_details}
+                    </div>
+                )}
+
                 {data.order_details && data.order_details.length > 0 ? (
                     <div className="col-span-12">
                         {/* Contenedor con desplazamiento */}
@@ -125,6 +164,11 @@ export const OrderFormBase = ({
                                     key={detail.id}
                                     className="flex relative justify-between items-center px-4 py-2 border rounded-lg shadow-sm bg-white"
                                 >
+                                    <div className="flex flex-col sm:flex-row sm:items-center">
+                                        <div className="text-lg font-semibold mr-4 ml-4">
+                                            {detail.product_id}
+                                        </div>
+                                    </div>
                                     <div className="flex flex-col sm:flex-row sm:items-center">
                                         <div className="text-lg font-semibold mr-4 ml-4">
                                             {detail.productName}
@@ -162,12 +206,6 @@ export const OrderFormBase = ({
                         No hay detalles de la compra disponibles.
                     </div>
                 )}
-
-                {progress && (
-                    <progress value={progress.percentage} max="100">
-                        {progress.percentage}%
-                    </progress>
-                )}
             </div>
 
             {/* Second Column */}
@@ -180,7 +218,7 @@ export const OrderFormBase = ({
                             className="bg-primary w-full text-white font-semibold  py-2
                     rounded-2xl px-10"
                         >
-                            {model && "Actualizar"}
+                            {model ? "Actualizar" : "Crear"}
                         </button>
                     </div>
                 )}

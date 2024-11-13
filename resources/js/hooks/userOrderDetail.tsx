@@ -23,14 +23,17 @@ export const useOrderDetails = ({ products, data, setData }: Props) => {
         const selectedProduct = products.find(
             (product) => product.id === parseInt(productId)
         );
+
         if (!selectedProduct) return;
 
         const newOrderDetails: IOrderDetail[] = data.order_details || [];
         newOrderDetails.unshift({
-            id: selectedProduct.id,
+            id: selectedProduct.product_id ?? selectedProduct.id,
             productName: selectedProduct.title,
             priceUnit: Number(selectedProduct.price),
         });
+
+        console.log(newOrderDetails);
         setData("order_details", newOrderDetails);
         updateTotal(newOrderDetails);
     };

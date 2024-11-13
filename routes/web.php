@@ -10,7 +10,8 @@ use Inertia\Inertia;
 Route::middleware('auth', 'verified')->group(function () {
     Route::get('/', [OrderController::class, "index"])->name('home');
 
-    Route::resource('orders', OrderController::class, ['except' => 'index'])->names('orders');
+    Route::resource('orders', OrderController::class, ['except' => ["index, update"]])->names('orders');
+    Route::post("edit-order/{order}", [OrderController::class, "update"])->name("orders.update");
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

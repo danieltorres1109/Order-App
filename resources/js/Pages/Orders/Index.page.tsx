@@ -91,7 +91,10 @@ export default function Dashboard({ orders: data }: Props) {
                         showSearch
                         onSearch={(e) => {}}
                     >
-                        <ButtonEnlace type="crear" route={"#"} />
+                        <ButtonEnlace
+                            type="crear"
+                            route={route("orders.create")}
+                        />
                     </TitleDash1>
                 }
             />
