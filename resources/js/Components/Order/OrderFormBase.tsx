@@ -167,11 +167,6 @@ export const OrderFormBase = ({
                                 >
                                     <div className="flex flex-col sm:flex-row sm:items-center">
                                         <div className="text-lg font-semibold mr-4 ml-4">
-                                            {detail.product_id}
-                                        </div>
-                                    </div>
-                                    <div className="flex flex-col sm:flex-row sm:items-center">
-                                        <div className="text-lg font-semibold mr-4 ml-4">
                                             {detail.productName}
                                         </div>
                                     </div>
