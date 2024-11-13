@@ -26,7 +26,7 @@ class UpdateOrderRequest extends FormRequest
             'created_at' => 'required|date',
             'status' => 'required|string',
             'order_details' => 'required|array',
-            'order_details.*.id' => 'nullable|exists:order_details,id',
+            'order_details.*.product_id' => 'nullable|exists:products,id',
 
         ];
     }

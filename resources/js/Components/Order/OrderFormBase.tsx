@@ -46,6 +46,7 @@ export const OrderFormBase = ({
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
 
+        console.log("data");
         console.log(data);
 
         const url = data.id ? `/edit-order/${data.id}` : "/orders";
@@ -95,8 +96,8 @@ export const OrderFormBase = ({
                     setData={setData}
                     readOnly={onlyView}
                     error={errors.user_id}
-                    name="user"
-                    value={data.user?.id}
+                    name="user_id"
+                    value={data.user_id}
                     options={users.map((user) => ({
                         id: user.id,
                         name: user.name,
@@ -132,6 +133,7 @@ export const OrderFormBase = ({
                         className="input"
                         onChange={(e) => {
                             addProduct(e.target.value);
+                            console.log("agregando producto");
                             console.log(e.target.value);
 
                             e.target.value = "";

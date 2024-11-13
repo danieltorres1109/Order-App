@@ -28,7 +28,8 @@ export const useOrderDetails = ({ products, data, setData }: Props) => {
 
         const newOrderDetails: IOrderDetail[] = data.order_details || [];
         newOrderDetails.unshift({
-            id: selectedProduct.product_id ?? selectedProduct.id,
+            // @ts-ignore
+            product_id: selectedProduct.product_id ?? selectedProduct.id,
             productName: selectedProduct.title,
             priceUnit: Number(selectedProduct.price),
         });

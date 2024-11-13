@@ -10,7 +10,6 @@ class OrderService
 {
     public function updateOrder(Order $order, array $data)
     {
-        // Log::info($data);
         $order->update([
             'user_id' => $data['user_id'],
             'status' => $data['status'],
@@ -18,9 +17,6 @@ class OrderService
 
         $totalSell = $this->processOrderDetails($order, $data['order_details']);
         $order->update(['totalSell' => $totalSell]);
-
-        log::info("2323");
-        log::info($order);
 
         return $order;
     }

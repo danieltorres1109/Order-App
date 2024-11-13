@@ -68,6 +68,8 @@ class OrderController extends Controller
     public function update(UpdateOrderRequest $request, string $id)
     {
         $order = Order::findOrFail($id);
+
+
         $this->orderService->updateOrder($order, $request->validated());
         return Redirect::back()->with('success', 'Venta actualizada.');
     }
