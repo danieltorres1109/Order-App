@@ -8,7 +8,7 @@ Route::middleware('auth', 'verified')->group(function () {
     Route::get('/', [OrderController::class, 'index'])->name('home');
     Route::get('/dashboard', [OrderController::class, 'index'])->name('dashboard');
 
-    Route::resource('orders', OrderController::class, ['except' => ['index, update']])->names('orders');
+    Route::resource('orders', OrderController::class, ['except' => ['index', 'update']])->names('orders');
     Route::post('edit-order/{order}', [OrderController::class, 'update'])->name('orders.update');
     Route::post('/setCancelled/{order}', [OrderController::class, 'updateStatus'])->name('orders.updateStatus');
 
