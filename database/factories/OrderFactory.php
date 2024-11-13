@@ -2,7 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\Product;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,6 +19,7 @@ class OrderFactory extends Factory
      */
     public function definition(): array
     {
+
         return [
             'user_id' => User::all()->random()->id,
             'status' => $this->faker->randomElement(['pending', 'processing', 'shipped', 'delivered', 'cancelled', 'return_requested', 'return_accepted', 'refunded', 'failed']),

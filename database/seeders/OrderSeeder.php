@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Order;
+use App\Models\OrderDetail;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -13,18 +14,18 @@ class OrderSeeder extends Seeder
      */
     public function run(): void
     {
-        Order::factory()->count(100)->create()->each(function ($sale) {
-            // $details = SaleDetail::factory()->count(rand(1, 5))->make();
-            // $total = 0;
+        Order::factory()->count(100)->create()->each(function ($order) {
+            $details = OrderDetail::factory()->count(rand(1, 4))->make();
+            $total = 0;
 
-            // foreach ($details as $detail) {
-            //     $detail->sale_id = $sale->id;
-            //     $detail->save();
-            //     $total += $detail->amount * $detail->priceUnit;
-            // }
+            foreach ($details as $detail) {
+                $detail->order_id = $order->id;
+                $detail->save();
+                $total += $detail->amount * $detail->priceUnit;
+            }
 
-            // $sale->totalSell = $total;
-            // $sale->save();
+            $order->totalSell = $total;
+            $order->save();
         });
     }
 }

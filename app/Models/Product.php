@@ -6,6 +6,8 @@ namespace App\Models;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Product extends Model
 {
@@ -16,26 +18,19 @@ class Product extends Model
         'slug',
         'sku',
         'price',
-        'desc',
         'totalSell',
         'user_id',
-        'brand_id',
-        'category_id',
-        'percentage',
-        'expirationDate',
-        'segmentation_id',
-        'is_visible',
         'quantityStock',
     ];
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
 
-    // public function saleDetails()
-    // {
-    //     return $this->hasMany(SaleDetail::class);
-    // }
+    public function orderDetails(): HasMany
+    {
+        return $this->hasMany(OrderDetail::class);
+    }
 }
