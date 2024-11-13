@@ -21,7 +21,7 @@ class OrderSeeder extends Seeder
             foreach ($details as $detail) {
                 $detail->order_id = $order->id;
                 $detail->save();
-                $total += $detail->amount * $detail->priceUnit;
+                $total += $detail->priceUnit;
             }
 
             $order->totalSell = $total;

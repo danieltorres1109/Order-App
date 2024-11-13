@@ -19,7 +19,7 @@ return new class extends Migration
                 ->nullable()
                 ->constrained('products')
                 ->onDelete('SET NULL');
-            $table->integer('amount');
+            // $table->integer('amount');
             $table->decimal('priceUnit', 15, 2);
             $table->timestamps();
         });

@@ -25,7 +25,7 @@ class OrderDetailFactory extends Factory
         return [
             'productName' => $product->title,
             'product_id' => $product->id,
-            'amount' => $this->faker->numberBetween(1, 10),
+            // 'amount' => $this->faker->numberBetween(1, 10),
             'priceUnit' => $price,
         ];
     }

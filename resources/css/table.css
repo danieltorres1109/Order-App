@@ -1,0 +1,56 @@
+/* Estilos globales para todas las tablas */
+table {
+    @apply min-w-full divide-y divide-gray-200;
+}
+
+/* Estilo para el thead con fondo gris */
+thead tr {
+    @apply bg-[#F5F5F5];
+}
+
+/* Redondeando las esquinas de los extremos de cada fila en thead y tbody */
+thead tr th:first-child,
+tbody tr:first-child td:first-child,
+tbody tr:last-child td:first-child {
+    @apply rounded-l-full;
+}
+
+thead tr th:last-child,
+tbody tr:first-child td:last-child,
+tbody tr:last-child td:last-child {
+    @apply rounded-r-full;
+}
+
+/* Estilos para alternar colores de fondo en tbody, comenzando con blanco */
+tbody tr:nth-child(odd) {
+    @apply bg-white;
+}
+
+tbody tr:nth-child(even) {
+    @apply bg-[#F5F5F5];
+}
+
+/* Estilos para las celdas del encabezado */
+thead th {
+    @apply font-extrabold text-gray-900 text-sm;
+}
+
+/* Padding para todas las celdas del tbody */
+tbody tr td {
+    @apply p-1 md:py-2 md:px-4 text-sm text-center; /* Ajusta el tamaño del padding según necesites */
+}
+
+/* Aplica bordes redondeados a las celdas de todas las filas del tbody */
+tbody tr td:first-child {
+    @apply rounded-tl-full rounded-bl-full; /* Esquinas redondeadas a la izquierda */
+}
+
+tbody tr td:last-child {
+    @apply rounded-tr-full rounded-br-full; /* Esquinas redondeadas a la derecha */
+}
+
+tbody tr td {
+    color: #38383c; /* Color gris más ligero */
+    font-weight: 300; /* Fuente más ligera */
+    size: 10px;
+}

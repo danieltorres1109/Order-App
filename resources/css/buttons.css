@@ -1,0 +1,26 @@
+.btn {
+    @apply items-center px-4 py-2
+    shadow-sm rounded-lg  transition duration-500;
+}
+
+.btn-outline-info {
+    @apply border-gray-50 border-[1px]
+    focus:outline-none text-info
+    hover:bg-infoClair;
+}
+
+.btn-outline-success {
+    @apply border-gray-50 border-[1px]
+    focus:outline-none text-success
+    hover:bg-successClair;
+}
+
+.btn-outline-danger {
+    @apply border-gray-50 border-[1px]
+    focus:outline-none text-danger
+    hover:bg-dangerClair;
+}
+
+.btn-primary {
+    @apply flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-indigo-600 py-3 px-8 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none sm:w-full;
+}
