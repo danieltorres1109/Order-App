@@ -27,9 +27,7 @@ class OrderController extends Controller
 
     public function index(): \Inertia\Response
     {
-        /* como orderno por id ultimo? */
         $orders = Order::with('user')->orderBy('id', 'desc')->get();
-        // $orders = Order::with('user')->
         return Inertia::render('Orders/Index.page', [
             'orders' => $orders
         ]);
@@ -72,5 +70,16 @@ class OrderController extends Controller
 
         $this->orderService->updateOrder($order, $request->validated());
         return Redirect::back()->with('success', 'Venta actualizada.');
+    }
+
+    public function updateStatus(Request $request, Order $order)
+    {
+        $request->validate([
+            'status' => 'required|string',
+        ]);
+
+        $order->update(['status' => $request->input('status')]);
+
+        return Redirect::back()->with('success', 'Estado de la orden actualizado correctamente.');
     }
 }

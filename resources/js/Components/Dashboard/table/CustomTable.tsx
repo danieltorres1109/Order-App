@@ -56,11 +56,15 @@ export const CustomTable = ({
         setData(defaultData);
     }, [defaultData]);
 
+    React.useEffect(() => {
+        table.setPageSize(10);
+    }, [table]);
+
     return (
         <div className="p-2">
             {TitleDashWithSearch}
 
-            <div className="overflow-auto md:h-[390px] 2xl:h-[400px]">
+            <div className="overflow-auto ">
                 <table className="table-fixed ">
                     <thead>
                         {table.getHeaderGroups().map((headerGroup) => (

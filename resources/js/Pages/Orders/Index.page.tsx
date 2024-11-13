@@ -11,12 +11,29 @@ import { useMemo } from "react";
 import { IoMdWatch } from "react-icons/io";
 import { route } from "../../../../vendor/tightenco/ziggy/src/js/index";
 import { ButtonConfirmDelete } from "@/Components/Dashboard/ButtonConfirmDelete";
+import { useForm } from "@inertiajs/react";
 
 interface Props {
     orders: IOrder[];
 }
 
 export default function Dashboard({ orders: data }: Props) {
+    const { data: data2, post } = useForm({
+        status: "cancelled",
+    });
+
+    const changeStatus = (id: number) => {
+        post(route("orders.updateStatus", id), {
+            preserveScroll: true,
+            onSuccess: () => {
+                alert("Orden cancelada correctamente");
+            },
+            onError: () => {
+                alert("Error al cancelar la orden");
+            },
+        });
+    };
+
     const columnHelper = createColumnHelper<IOrder>();
 
     const columns = [
@@ -64,14 +81,13 @@ export default function Dashboard({ orders: data }: Props) {
                         type="editar"
                         route={route("orders.edit", info.row.original.id)}
                     />
-                    <ButtonConfirmDelete
-                        // route={route(
-                        //     "sales-admin.destroy",
-                        //     info.row.original.id
-                        // )}
-                        route={"#"}
-                        id={info.row.original.id}
-                    />
+                    <button
+                        onClick={() => {
+                            changeStatus(info.row.original.id);
+                        }}
+                    >
+                        Cancelar
+                    </button>
                 </div>
             ),
         }),
@@ -88,7 +104,7 @@ export default function Dashboard({ orders: data }: Props) {
                     <TitleDash1
                         title="Ordenes"
                         icon={IoMdWatch}
-                        showSearch
+                        showSearch={false}
                         onSearch={(e) => {}}
                     >
                         <ButtonEnlace
