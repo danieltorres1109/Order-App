@@ -62,7 +62,7 @@ class OrderController extends Controller
     public function store(StoreOrderRequest $request)
     {
         $this->orderService->createOrder($request->validated());
-        return Redirect::back()->with('success', 'Orden creada exitosamente.');
+        return Redirect::route('orders.index')->with('success', 'Orden actualizada exitosamente.');
     }
 
     public function update(UpdateOrderRequest $request, string $id)

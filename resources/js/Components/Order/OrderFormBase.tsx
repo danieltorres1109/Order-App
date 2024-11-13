@@ -9,7 +9,7 @@ import { IProduct } from "@/types/products";
 import DateTimeInput from "../Form/DateTimeInput";
 import { useOrderDetails } from "@/hooks/userOrderDetail";
 import { statusOption } from "@/Constants/constants";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 
 interface Props {
     users: User[];
@@ -90,6 +90,8 @@ export const OrderFormBase = ({
                         </p>
                     </div>
                 </div>
+
+                <ToastContainer />
 
                 <SelectInput
                     label="Comprador"

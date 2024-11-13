@@ -29,7 +29,7 @@ class StoreOrderRequest extends FormRequest
             'user_id' => 'required|exists:users,id',
             'status' => 'required|string',
             'order_details' => 'required|array',
-            'order_details.*.id' => 'required|exists:products,id',
+            'order_details.*.product_id' => 'required|exists:products,id',
         ];
     }
 }
