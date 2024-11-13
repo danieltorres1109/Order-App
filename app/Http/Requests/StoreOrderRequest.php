@@ -22,9 +22,6 @@ class StoreOrderRequest extends FormRequest
      */
     public function rules(): array
     {
-
-        Log::info($this->all());
-
         return [
             'user_id' => 'required|exists:users,id',
             'status' => 'required|string',

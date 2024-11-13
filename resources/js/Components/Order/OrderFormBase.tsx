@@ -46,9 +46,6 @@ export const OrderFormBase = ({
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
 
-        console.log("data");
-        console.log(data);
-
         const url = data.id ? `/edit-order/${data.id}` : "/orders";
 
         post(url, {

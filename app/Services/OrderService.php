@@ -58,8 +58,6 @@ class OrderService
 
         foreach ($orderDetailsData as $detail) {
 
-            log::info("da");
-            log::info($detail);
             $productId = $detail['product_id'] ?? $detail['id'];
             $product = Product::find($productId);
 
