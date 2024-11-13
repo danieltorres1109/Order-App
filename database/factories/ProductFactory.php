@@ -22,9 +22,10 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         $productName = $this->faker->words(3, true);
+
         return [
             'title' => ucwords($this->faker->words(3, true)),
-            'slug' => Str::slug($productName) . '-' . rand(100, 9999),
+            'slug' => Str::slug($productName).'-'.rand(100, 9999),
             'sku' => $this->faker->unique()->numberBetween(1000000000, 9999999999),
             'price' => $this->faker->numberBetween(10, 1000),
             'desc' => "Descripción de $productName",

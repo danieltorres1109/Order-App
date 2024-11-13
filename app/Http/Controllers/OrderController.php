@@ -8,15 +8,12 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
 use App\Services\OrderService;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
 class OrderController extends Controller
 {
-
     private OrderService $orderService;
 
     public function __construct(OrderService $orderService)
@@ -24,12 +21,12 @@ class OrderController extends Controller
         $this->orderService = $orderService;
     }
 
-
     public function index(): \Inertia\Response
     {
         $orders = Order::with('user')->orderBy('id', 'desc')->get();
+
         return Inertia::render('Orders/Index.page', [
-            'orders' => $orders
+            'orders' => $orders,
         ]);
     }
 
@@ -40,7 +37,7 @@ class OrderController extends Controller
 
         return Inertia::render('Orders/Create.page', [
             'users' => $users,
-            'products' => $products
+            'products' => $products,
         ]);
     }
 
@@ -53,13 +50,14 @@ class OrderController extends Controller
         return Inertia::render('Orders/Edit.page', [
             'order' => $order,
             'users' => $users,
-            'products' => $products
+            'products' => $products,
         ]);
     }
 
     public function store(StoreOrderRequest $request)
     {
         $this->orderService->createOrder($request->validated());
+
         return Redirect::route('orders.index')->with('success', 'Orden actualizada exitosamente.');
     }
 
@@ -67,8 +65,8 @@ class OrderController extends Controller
     {
         $order = Order::findOrFail($id);
 
-
         $this->orderService->updateOrder($order, $request->validated());
+
         return Redirect::back()->with('success', 'Venta actualizada.');
     }
 

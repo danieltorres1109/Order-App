@@ -2,9 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Product;
 use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**

@@ -25,8 +25,7 @@ class OrderService
     {
         $userId = $data['user_id'] ?? auth()->id();
 
-
-        if (!$userId) {
+        if (! $userId) {
             Log::info('Usuario no autenticado');
             throw new \Exception('Usuario no autenticado');
         }
@@ -37,10 +36,8 @@ class OrderService
             'totalSell' => 0,
         ]);
 
-
         $totalSell = $this->processOrderDetails($order, $data['order_details']);
         $order->update(['totalSell' => $totalSell]);
-
 
         return $order;
     }
@@ -61,8 +58,9 @@ class OrderService
             $productId = $detail['product_id'] ?? $detail['id'];
             $product = Product::find($productId);
 
-            if (!$product) {
+            if (! $product) {
                 Log::error('Producto no encontrado', ['productId' => $productId]);
+
                 continue;
             }
 
