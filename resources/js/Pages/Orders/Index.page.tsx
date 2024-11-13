@@ -81,13 +81,16 @@ export default function Dashboard({ orders: data }: Props) {
                         type="editar"
                         route={route("orders.edit", info.row.original.id)}
                     />
-                    <button
-                        onClick={() => {
-                            changeStatus(info.row.original.id);
-                        }}
-                    >
-                        Cancelar
-                    </button>
+                    {info.row.original.status !== "cancelled" && (
+                        <button
+                            className="btn-outline-danger"
+                            onClick={() => {
+                                changeStatus(info.row.original.id!);
+                            }}
+                        >
+                            Cancelar
+                        </button>
+                    )}
                 </div>
             ),
         }),
