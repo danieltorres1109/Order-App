@@ -45,12 +45,22 @@ Duplicate .env and put the .env database
 cp .env-template .env
 ```
 
-Execute the migrations on dev 
+Update values for db conection, for example
 ```
-php artisan migrate:fresh
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=orderapp
+DB_USERNAME=root
+DB_PASSWORD=password
 ```
 
-optional execute php artisan migrate:fresh --seed just in dev.
+Execute the migrations on dev 
+```
+php artisan migrate:fresh --seed
+```
+
+<!-- optional execute php artisan migrate:fresh --seed just in dev. -->
 
 
 Finally
